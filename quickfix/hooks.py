@@ -20,7 +20,19 @@ app_license = "mit"
 # 		"has_permission": "quickfix.api.permission.has_app_permission"
 # 	}
 # ]
-
+fixtures = [
+    {
+        "dt": "Role","filters": [["name","in",["QF Service Staff","QF Technician","QF Manager"]]]
+    }
+]
+after_install="quickfix.install.after_install"
+doc_events = {
+    "*":{
+        "on_update":"quickfix.audit.log_change",
+        "on_submit":"quickfix.audit.log_change",
+        "on_cancel":"quickfix.audit.log_change"
+    }
+}
 # Includes in <head>
 # ------------------
 

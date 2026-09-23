@@ -1,9 +1,56 @@
 # Copyright (c) 2026, Nishok and contributors
 # For license information, please see license.txt
 
-# import frappe
+import frappe
 from frappe.model.document import Document
 
 
 class JobCard(Document):
-	pass
+	def validate(self):
+		if len(self.customer_phone)!=10:
+			frappe.throw("Phone number must be 10 digits")
+		if self.status in ["In Repair","Ready for Delivery","Delivered","Cancelled"]:
+			if not self.assigned_technician:
+				frappe.throw("The technician should be there")
+		sum=0
+		for i in self.parts_used:
+			i.total_price = i.quantity * i.unit_price
+			sum +=i.total_price
+		self.parts_total=sum
+
+		if not self.labour_charge:
+			s = frappe.get_single("QuickFix Settings")
+			self.labour_charge=s.default_labour_charge
+		self.final_amount = self.parts_total+self.labour_charge
+
+	def before_submit(self):
+		if self.status != "Ready for Delivery":
+			frappe.throw("Cannot sumbit, it must be Ready for delivery")
+		for i in self.parts_used:
+			stq = frappe.db.get_value("Spare Part",i.part,"stock_qty")
+			if stq <= i.quantity:
+				frappe.throw("No enough stock")
+	def on_submit(self):
+		for i in self.parts_used:
+			cqty =frappe.db.get_value("Spare Part",i.part,"stock_qty")
+			nqty = cqty - i.quantity
+			frappe.db.set_value("Spare part",i.part,"stock_qty",ignore_permissions="True")
+			# this is a system action that happen automatically 
+			# when job card is submited as the technician have permission to 
+			# submit the doc, they do not need seperate permission on spare part
+	def on_cancel(self):
+		self.status="Cancelled"
+		for i in self.parts_used:
+			cqty =frappe.db.get_value("Spare Part",i.part,"stock_qty")
+			nqty=cqty+i.quantity
+			frappe.db.set_value("Spare Part",i.part,"stock_qty",nqty,ignore_permissions=True)
+			invn=frappe.db.get_value("Service Invoice",{"job_card":self.name},"name")
+			if invn:
+				invoice=frappe.get_doc("Service Invoice",invn)
+				if invoice.docstatus==1:
+					invoice.cancel()
+	def on_trash(self):
+		if self.status !="Cancelled" and self.status != "Draft":
+			frappe.throw("Cannot delete as it should be in cancelled or in draft state")
+	# def on_update(self):
+	# 	self.save()

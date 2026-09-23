@@ -1,0 +1,29 @@
+[
+ {
+  "average_repair_hours": 8,
+  "description": "All types of phones can be repaired",
+  "device_type": "Smartphone",
+  "docstatus": 0,
+  "doctype": "Device Type",
+  "modified": "2026-09-23 11:09:24.455113",
+  "name": "Smartphone"
+ },
+ {
+  "average_repair_hours": 12,
+  "description": "All laptops are repaired here",
+  "device_type": "Laptop",
+  "docstatus": 0,
+  "doctype": "Device Type",
+  "modified": "2026-09-23 11:09:58.571474",
+  "name": "Laptop"
+ },
+ {
+  "average_repair_hours": 5,
+  "description": "Tabs are really good to repair",
+  "device_type": "Tablet",
+  "docstatus": 0,
+  "doctype": "Device Type",
+  "modified": "2026-09-23 11:10:29.846241",
+  "name": "Tablet"
+ }
+]
