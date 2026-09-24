@@ -30,8 +30,17 @@ doc_events = {
     "*":{
         "on_update":"quickfix.audit.log_change",
         "on_submit":"quickfix.audit.log_change",
-        "on_cancel":"quickfix.audit.log_change"
-    }
+        "on_cancel":"quickfix.audit.log_change",
+        
+    },
+    "Job Card":{"before_print":"quickfix.quickfix.doctype.job_card.job_card.before_print"}
+}
+jinja = {
+    "methods": ["quickfix.jinja_methods"]
+}
+
+scheduler_events={
+    "daily":["quickfix.quickfix.tasks.check_low_stock"]
 }
 # Includes in <head>
 # ------------------

@@ -1,5 +1,25 @@
 import frappe
 from frappe.query_builder import DocType
+from frappe.utils import add_days,now_datetime
+
+@frappe.whitelist()
+def get_overdue_jobs():
+    j=DocType("Job Card")
+    seven_days_ago = add_days(now_datetime(),-7)
+    result = frappe.qb.from_(j).select(j.name,j.customer_name,j.assigned_technician,j.creation).where(j.status.isin(["Pending Diagnosis","In Repair"])).where(j.creation<seven_days_ago).orderby(j.creation).run(as_dict=True)
+    return result
+
+@frappe.whitelist()
+def transfer_job(from_tech, to_tech):
+    try:
+        frappe.db.sql(""" UPDATE `tabJob Card` SET assigned_technician = %(to_tech)s WHERE assigned_technician = %(from_tech)s AND status NOT IN ('Delivered', 'Cancelled')""",
+                      {"from_tech": from_tech,"to_tech": to_tech})
+        frappe.db.commit()
+        return "Jobs transferred successfully"
+    except Exception as e:
+        frappe.db.rollback()
+        frappe.log_error(frappe.get_traceback(), "transfer_job failed")
+        raise
 
 @frappe.whitelist()
 def share_job_card(job_card_name,user_email):
@@ -19,3 +39,5 @@ def share_job_card(job_card_name,user_email):
 def rename_technician(old,new):
     frappe.rename_doc("Technician",old,new,merge=False)
     return "Technician changed from "+old +"to"+ new
+
+

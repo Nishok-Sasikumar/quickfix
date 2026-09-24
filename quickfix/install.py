@@ -6,7 +6,7 @@ def after_install():
             doc = frappe.new_doc("Device Type")
             doc.device_type = i
             doc.insert(ignore_permissions=True)
-    if not frappe.db.exists("QuickFix Settings","QuickFix Settings"):
+    if not frappe.db.exists("QuickFix Settings","Quick Fix shop"):
         s =frappe.get_single("QuickFix Settings")
         s.shop_name = "QuickFix Repair Shop"
         s.manager_email = "manager@gmail.com"

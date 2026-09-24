@@ -4,7 +4,8 @@
 import frappe
 from frappe.model.document import Document
 
-
+def before_print(doc, method=None, print_settings=None):
+	doc.print_summary = (f"{doc.customer_name} - "f"{doc.device_type} {doc.device_model}")
 class JobCard(Document):
 	def validate(self):
 		if len(self.customer_phone)!=10:

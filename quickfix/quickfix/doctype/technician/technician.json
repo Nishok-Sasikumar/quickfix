@@ -36,6 +36,7 @@
   {
    "fieldname": "specalization",
    "fieldtype": "Link",
+   "ignore_user_permissions": 1,
    "label": "Specalization",
    "options": "Device Type"
   },
@@ -87,7 +88,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-23 15:00:34.509579",
+ "modified": "2026-09-24 14:32:06.270796",
  "modified_by": "Administrator",
  "module": "quickfix",
  "name": "Technician",
@@ -103,6 +104,7 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "select": 1,
    "share": 1,
    "write": 1
   },
@@ -118,7 +120,6 @@
   {
    "email": 1,
    "export": 1,
-   "if_owner": 1,
    "print": 1,
    "read": 1,
    "report": 1,

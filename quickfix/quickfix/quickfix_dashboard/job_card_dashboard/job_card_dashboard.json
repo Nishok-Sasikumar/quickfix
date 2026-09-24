@@ -1,0 +1,25 @@
+{
+ "cards": [
+  {
+   "card": "Job Card Card"
+  }
+ ],
+ "charts": [
+  {
+   "chart": "Job Card Chart",
+   "width": "Half"
+  }
+ ],
+ "creation": "2026-09-24 10:26:26.189229",
+ "dashboard_name": "Job Card Dashboard",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "modified": "2026-09-24 10:29:18.287766",
+ "modified_by": "Administrator",
+ "module": "quickfix",
+ "name": "Job Card Dashboard",
+ "owner": "Administrator"
+}

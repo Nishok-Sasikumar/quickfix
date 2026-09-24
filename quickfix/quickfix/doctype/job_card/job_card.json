@@ -18,11 +18,11 @@
   "imei_or_serial",
   "problem_description",
   "technician_section",
-  "assigned_technician",
   "diagnosis_notes",
   "estimated_cost",
   "diagnosis_date",
   "priority",
+  "assigned_technician",
   "parts_section",
   "parts_used",
   "financials__and_delivery_section",
@@ -31,7 +31,7 @@
   "final_amount",
   "payment_status",
   "delivery_date",
-  "remark",
+  "remarks",
   "status"
  ],
  "fields": [
@@ -73,12 +73,6 @@
    "fieldname": "technician_section",
    "fieldtype": "Section Break",
    "label": "Assignment & Diagnosis"
-  },
-  {
-   "fieldname": "assigned_technician",
-   "fieldtype": "Link",
-   "label": "Assigned Technician",
-   "options": "Technician"
   },
   {
    "fieldname": "parts_section",
@@ -181,23 +175,29 @@
    "label": "Delivery Date"
   },
   {
-   "fieldname": "remark",
-   "fieldtype": "Small Text",
-   "label": "Remark"
-  },
-  {
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Status",
    "options": "Draft\nPending Diagnosis\nAwaiting Customer Approval\nIn Repair\nReady for Delivery\nDelivered\nCancelled"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "assigned_technician",
+   "fieldtype": "Link",
+   "label": "Assigned Technician",
+   "options": "Technician"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-09-23 11:58:11.035371",
+ "modified": "2026-09-24 15:29:45.659136",
  "modified_by": "Administrator",
  "module": "quickfix",
  "name": "Job Card",
