@@ -1,14 +1,14 @@
 # B2c — Dangerous Patterns - document lifecycle bugs
 
 ## The snippet below has two bugs related to document lifecycle. Identify both and write the corrected version in README_internals.md:
-
+```
   def validate(self):
   self.total = sum(r.amount for r in self.items)
     self.save()
     other = frappe.get_doc("Spare Part", self.part)
     other.stock_qty -= self.qty
     other.save()
-
+```
 # Answer
 
 def validate(self):
