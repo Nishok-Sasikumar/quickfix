@@ -2,7 +2,18 @@ import frappe
 from frappe.query_builder import DocType
 from frappe.utils import add_days,now_datetime
 
-
+@frappe.whitelist()
+def get_job_card(user=None):
+     if not user:  
+        user = frappe.session.user
+     r=frappe.get_roles(user)
+     if "QF Manager" in r or "System Manager" in r:
+          return ""
+     if "QF Technician" in r:
+          c="`tabJob Card` .assigned_technician in(select name from `tabTechnician` where user ='"+ user+ "')"
+          return c
+     return ""
+     
 
 @frappe.whitelist()
 def get_overdue_jobs():

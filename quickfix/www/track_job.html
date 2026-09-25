@@ -14,11 +14,12 @@
     <p>Estimated Cost: {{ job_card.estimated_cost or "" }}</p>
 
     {% if job_card.status == "Awaiting Customer Approval" %}
-        <form method="POST" action="/api/method/quickfix.api.customer_decision">
-            <input type="hidden" name="job_card" value="{{ job_card.name }}">
-            <button type="submit" name="decision" value="approve">Approve</button>
-            <button type="submit" name="decision" value="reject">Reject</button>
-        </form>
+       <form method="POST" action="/api/method/quickfix.api.customer_decision">
+    <input type="hidden" name="job_card" value="{{ job_card.name }}">
+    <input type="hidden" name="csrf_token" value="{{ frappe.session.csrf_token }}">
+    <button type="submit" name="decision" value="approve">Approve</button>
+    <button type="submit" name="decision" value="reject">Reject</button>
+</form>
     {% endif %}
 {% endif %}
 

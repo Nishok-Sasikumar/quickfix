@@ -94,6 +94,9 @@ frappe.ui.form.on("Job Card", {
                 },"Transfer Technician","Transfer"
             );});
     }
+    // const manager = frappe.user.has_role('QE Manager');
+    // frm.toggle_display('customer_phone',manager);
+
 },
 
     assigned_technician(frm){

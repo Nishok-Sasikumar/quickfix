@@ -42,7 +42,9 @@ jinja = {
 scheduler_events={
     "daily":["quickfix.quickfix.tasks.check_low_stock"]
 }
-
+permission_query_condition = {
+    "Job Card":"quickfix.api.get_job_card"
+}
 # Includes in <head>
 # ------------------
 

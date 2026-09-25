@@ -91,8 +91,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Customer Phone",
-   "options": "Phone",
-   "reqd": 1
+   "options": "Phone"
   },
   {
    "fieldname": "device_brand",
@@ -198,7 +197,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-09-25 14:07:32.850119",
+ "modified": "2026-09-25 19:17:04.570801",
  "modified_by": "Administrator",
  "module": "quickfix",
  "name": "Job Card",
