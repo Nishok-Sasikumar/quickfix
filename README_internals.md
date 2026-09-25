@@ -2,21 +2,22 @@
 
 ## The snippet below has two bugs related to document lifecycle. Identify both and write the corrected version in README_internals.md:
 
-##  def validate(self):
-##  self.total = sum(r.amount for r in self.items)
-##    self.save()
-##    other = frappe.get_doc("Spare Part", self.part)
-##    other.stock_qty -= self.qty
-##    other.save()
-
-# Answer
-
-- `def validate(self):
-    self.total = sum(r.amount for r in self.items)
+  def validate(self):
+  self.total = sum(r.amount for r in self.items)
     self.save()
     other = frappe.get_doc("Spare Part", self.part)
     other.stock_qty -= self.qty
-    other.save()`
+    other.save()
+
+# Answer
+
+def validate(self):
+    self.total = sum(r.amount for r in self.items)-
+def on_update(self):
+    other = frappe.get_doc("Spare Part", self.part)
+    other.stock_qty -= self.qty
+    other.save()
+` The calculations should be done on the validations and the db related things should be done on the on_update`
 
 # B2d — Concurrency, One Question - optimistic locking
 ## In README_internals.md: why would you see a "Document has been modified after you have opened it" error, and how does Frappe prevent concurrent overwrites? (One paragraph.)

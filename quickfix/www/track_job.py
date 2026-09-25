@@ -1,13 +1,9 @@
 import frappe
-def get_context(c):
-    c.no_cache=1
-    jcn=frappe.form_dict.get("jc")
-    if not jcn:
-        c.job_card=None
-        return c
-    if not frappe.db.exists("Job Card",jcn):
-        c.job_card=None
-        return c
-    doc=frappe.get_doc("Job Card",jcn)
-    c.job_card =doc
-    return c
+
+def get_context(context):
+    job_card_name = frappe.form_dict.get("jc")
+
+    if job_card_name and frappe.db.exists("Job Card", job_card_name):
+        context.job_card = frappe.get_doc("Job Card", job_card_name)
+    else:
+        context.job_card = None

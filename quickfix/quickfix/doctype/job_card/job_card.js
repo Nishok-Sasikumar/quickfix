@@ -3,12 +3,18 @@
 
 frappe.ui.form.on("Job Card", {
 
-    device_type(frm){
-        tech_filter();
-    },
-    onload(frm){
-        tech_filter();
-    },
+
+    setup: function(frm) {
+        frm.set_query("assigned_technician", function() {
+            return {
+                filters: {
+                    status: "Active",
+                    specialization: frm.doc.device_type
+                }
+            };
+        });
+    }
+,
 	refresh(frm){
     let status =frm.doc.status;
     let c= "gray";
@@ -85,14 +91,38 @@ frappe.ui.form.on("Job Card", {
                                     frm.trigger("assigned_technician");
                                 }});
                         });
-                },
-                "Transfer Technician","Transfer"
+                },"Transfer Technician","Transfer"
             );});
     }
 },
+
+    assigned_technician(frm){
+        if(!frm.doc.assigned_technician){
+            return;
+        }
+        frappe.call({
+            method:"frappe.client.get_value",
+            args:{
+                doctype:"Technician",
+                filters: frm.doc.assigned_technician,
+                fieldname:"specialization"
+            },
+            callback(r){
+                let spec =r.message.specialization;
+                if(spec && spec !== frm.doc.device_type){
+                    frappe.msgprint("Technician specialization ("+spec+")does not match device type ("+frm.doc.device_type+")");
+                }
+            }
+        });
+    }
+
 });
-function tech_filter(frm){
-    frm.set_df_property("assigned_technician","filters",{
-        status:"Active",specalization:frm.doc.device_type
-    });
-}
+
+
+frappe.ui.form.on("Part Usage Entry",{
+    quantity(frm,cdt,cdn){
+        let row =locals[cdt][cdn];
+        let total =row.quantity*row.unit_price;
+        frappe.model.set_value(cdt,cdn,"total_price",total);
+    }
+});

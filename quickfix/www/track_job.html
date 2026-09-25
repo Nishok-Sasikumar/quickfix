@@ -1,1 +1,27 @@
 
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+
+{% if not job_card %}
+    <h3>Job Card not found</h3>
+
+{% else %}
+    <h2>Track Your Repair</h2>
+    <p>Job Card: {{ job_card.name }}</p>
+    <p>Status: {{ job_card.status }}</p>
+    <p>Diagnosis: {{ job_card.diagnosis_notes or "" }}</p>
+    <p>Estimated Cost: {{ job_card.estimated_cost or "" }}</p>
+
+    {% if job_card.status == "Awaiting Customer Approval" %}
+        <form method="POST" action="/api/method/quickfix.api.customer_decision">
+            <input type="hidden" name="job_card" value="{{ job_card.name }}">
+            <button type="submit" name="decision" value="approve">Approve</button>
+            <button type="submit" name="decision" value="reject">Reject</button>
+        </form>
+    {% endif %}
+{% endif %}
+
+{% endblock %}
+
+ <!-- http://127.0.0.1:8000/track_job?jc=JC-2026-00001 -->

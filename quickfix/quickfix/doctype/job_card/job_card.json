@@ -59,7 +59,8 @@
    "fieldname": "email",
    "fieldtype": "Data",
    "label": "Email",
-   "options": "Email"
+   "options": "Email",
+   "reqd": 1
   },
   {
    "fieldname": "device_type",
@@ -197,7 +198,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-09-24 15:29:45.659136",
+ "modified": "2026-09-25 14:07:32.850119",
  "modified_by": "Administrator",
  "module": "quickfix",
  "name": "Job Card",

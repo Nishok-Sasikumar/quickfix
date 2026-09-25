@@ -13,9 +13,9 @@ def check_low_stock():
         if p.stock_qty <=p.reorder_level:
             low_parts.append(p)
     if low_parts:
-        msg="The following part qty is low <br>"
+        msg="The following part qty is low"
         for p in low_parts:
-            msg=msg + p.part_name+"-Qty:"+ str(p.stock_qty)+ "<br>"
+            msg=msg + p.part_name+"-Qty:"+ str(p.stock_qty)
         frappe.sendmail(recipients=[s.manager_email],subject="Low stocks",message=msg,delayed=False)
     l=frappe.new_doc("Audit Log")
     l.doctype_name="Spare Part"

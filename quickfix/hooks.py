@@ -42,6 +42,7 @@ jinja = {
 scheduler_events={
     "daily":["quickfix.quickfix.tasks.check_low_stock"]
 }
+
 # Includes in <head>
 # ------------------
 

@@ -11,7 +11,7 @@
   "employee_id",
   "phone",
   "email",
-  "specalization",
+  "specialization",
   "status",
   "photo",
   "joining_date",
@@ -32,13 +32,6 @@
    "fieldtype": "Data",
    "label": "Email",
    "options": "Email"
-  },
-  {
-   "fieldname": "specalization",
-   "fieldtype": "Link",
-   "ignore_user_permissions": 1,
-   "label": "Specalization",
-   "options": "Device Type"
   },
   {
    "fieldname": "employee_id",
@@ -83,12 +76,18 @@
    "fieldname": "notes",
    "fieldtype": "Text",
    "label": "Notes"
+  },
+  {
+   "fieldname": "specialization",
+   "fieldtype": "Link",
+   "label": "Specalization",
+   "options": "Device Type"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-24 14:32:06.270796",
+ "modified": "2026-09-25 11:17:15.210058",
  "modified_by": "Administrator",
  "module": "quickfix",
  "name": "Technician",
